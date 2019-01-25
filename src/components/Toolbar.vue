@@ -100,12 +100,10 @@
 <script>
 export default {
   data: () => ({
-     items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' }
-      ],
+    menus: [
+      {title: "Conferma d'Ordine", to: "/conferma", icon: "done_all"},
+      {title: "Tipo Documento", to: "/documento", icon: "book"}
+    ],
     drawer: false,
     menuOrdini : {title: "Vistatura Ordini", to: "/vistatura", icon: "description"},
     menuLogin : {title: "Sign In", to: "/login", icon: "person"},
