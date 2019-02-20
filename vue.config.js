@@ -6,6 +6,15 @@ module.exports = {
     // Enable CSS source maps.
     sourceMap: true
   },
+  pwa: {
+    // configure the workbox plugin
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+        // swSrc is required in InjectManifest mode.
+        swSrc: 'public/service-worker.js',
+        // ...other Workbox options...
+    }
+  },
   configureWebpack: () => {
     if (process.env.NODE_ENV === 'production') {
       // mutate for production...
