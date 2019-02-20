@@ -2,13 +2,13 @@
     <v-container fluid>
         <v-layout row wrap align-center>
             <v-flex>
+                <!-- @change non funziona. Costretto a mettere il watcher -->
                 <v-select
                     :items="confermeOrdine"
                     v-model="confermaOrdineScelta"
                     label="Conferma d'Ordine"
                     hint="Scegli la Conferma d'Ordine"
                     persistent-hint
-                    @change="changeConfermaOrdine"
                 >
                    <template slot="selection" slot-scope="{item}">
                         {{ item.codice }} &nbsp; {{ item.descrizione }}
@@ -24,21 +24,18 @@
 
 <script>
 export default {
-    data: () => ({
-        confermaOrdineScelta: null
-    }),
-    created() {
-        this.confermaOrdineScelta = this.$store.getters.getConfermaOrdine
-    },
     computed: {
+        confermaOrdineScelta: {
+            get () {
+                return this.$store.getters.getConfermaOrdine
+            },
+            set (value) {
+                this.$store.commit('setConfermaOrdine', value)
+                this.$router.push('/vistatura')
+            }
+        },
         confermeOrdine() {
             return this.$store.getters.getConfermeOrdine
-        }
-    },
-    methods: {
-        changeConfermaOrdine() {
-            this.$store.dispatch('setConfermaOrdine', this.confermaOrdineScelta)
-            this.$router.push('/vistatura')
         }
     }
 }

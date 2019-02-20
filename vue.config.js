@@ -1,12 +1,41 @@
+const { WebpackWarPlugin } = require('webpack-war-plugin')
+
 module.exports = {
   publicPath: '/dtordini/',
-  configureWebpack: {
-    resolve: {
-      alias: require('./aliases.config').webpack
-    }
-  },
   css: {
     // Enable CSS source maps.
     sourceMap: true
+  },
+  configureWebpack: () => {
+    if (process.env.NODE_ENV === 'production') {
+      // mutate for production...
+      return {
+        plugins: [
+            new WebpackWarPlugin({
+                archiveName: 'monitor',
+            })
+        ],
+        devServer: {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            }
+        },
+        resolve: {
+          alias: require('./aliases.config').webpack
+        }   
+      }
+    } else {
+      // mutate for development...
+      return {
+        devServer: {
+          headers: {
+              'Access-Control-Allow-Origin': '*',
+          }
+        },
+        resolve: {
+          alias: require('./aliases.config').webpack
+        }
+      }
+    }
   }
 }

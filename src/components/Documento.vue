@@ -2,15 +2,15 @@
     <v-container fluid>
         <v-layout row wrap align-center>
             <v-flex>
+                <!-- @change non funziona. Costretto a mettere il watcher -->
                 <v-select
                     :items="tipiDocumento"
                     v-model="tipoDocumentoScelto"
                     label="Tipo Documento"
                     hint="Scegli il Tipo Documento"
                     persistent-hint
-                    @change="changeTipoDocumento"
                 >
-                   <template slot="selection" slot-scope="{item}">
+                    <template slot="selection" slot-scope="{item}">
                         {{ item.codice }} &nbsp; {{ item.descrizione }}
                     </template>
                     <template slot="item" slot-scope="{item}">
@@ -24,21 +24,18 @@
 
 <script>
 export default {
-    data: () => ({
-        tipoDocumentoScelto: null
-    }),
-    created() {
-        this.tipoDocumentoScelto = this.$store.getters.getTipoDocumento
-    },
     computed: {
+        tipoDocumentoScelto: {
+            get () {
+                return this.$store.getters.getTipoDocumento
+            },
+            set (value) {
+                this.$store.commit('setTipoDocumento', value)
+                this.$router.push('/vistatura')
+            }
+        },
         tipiDocumento() {
             return this.$store.getters.getTipiDocumento
-        }
-    },
-    methods: {
-        changeTipoDocumento() {
-            this.$store.dispatch('setTipoDocumento', this.tipoDocumentoScelto)
-            this.$router.push('/vistatura')
         }
     }
 }
