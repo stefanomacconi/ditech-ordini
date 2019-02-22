@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
     base: '/dtordini/',
-    mode: 'history',
+    //mode: 'history',
     routes
   })
 

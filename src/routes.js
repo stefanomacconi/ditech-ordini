@@ -9,6 +9,7 @@ import store from './store/store'
 
 export const routes = [
     { path: '/login', component: Login },
+    { path: '/', component: Login },
     {
         path: '/vistatura',
         component: Ordini,
@@ -27,7 +28,7 @@ export const routes = [
             }
         }
     },
-    {
+    /*{
         path: '/', beforeEnter(to, from, next) {
             if (store.getters.getToken) {
                 next('/vistatura')
@@ -35,7 +36,7 @@ export const routes = [
                 next('/login')
             }
         }
-    },
+    },*/
     {
         path: '/conferma', component: Conferma, beforeEnter(to, from, next) {
             if (store.getters.getToken) {
