@@ -1,7 +1,7 @@
 const { WebpackWarPlugin } = require('webpack-war-plugin')
 
 module.exports = {
-  publicPath: '/dtordini/',
+  publicPath: '/dt-ordini/',
   css: {
     // Enable CSS source maps.
     sourceMap: true
@@ -21,7 +21,7 @@ module.exports = {
       return {
         plugins: [
             new WebpackWarPlugin({
-                archiveName: 'dtordini',
+                archiveName: 'dt-ordini',
             })
         ],
         devServer: {

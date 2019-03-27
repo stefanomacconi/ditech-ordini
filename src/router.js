@@ -5,7 +5,7 @@ import {routes} from './routes'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-    base: '/dtordini/',
+    base: '/dt-ordini/',
     //mode: 'history',
     routes
   })
