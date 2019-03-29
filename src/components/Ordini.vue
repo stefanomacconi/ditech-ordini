@@ -191,9 +191,9 @@ export default {
                 data: dataDaStampare, 
                 responseType:'stream',
                 headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res => {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
                 const url = window.URL.createObjectURL(new Blob([res.data]));
                 const link = document.createElement('a');
                 link.href = url;
@@ -216,23 +216,26 @@ export default {
             this.dialog = false
             this.dialogLoading = true
             axios({
-                method: 'post',
-                url: '/ordine/fornitore/vista',
-                data: this.ordiniSelezionati, 
-                headers: {
+                    method: 'post',
+                    url: '/ordine/fornitore/vista',
+                    data: this.ordiniSelezionati, 
+                    headers: {
                         'Content-Type': 'application/json'
                     }
-                }).then(res => {
+            }).then(res => {
                     const ordiniData = {
                         vistati : res.data.vistati,
                         nonVistati : res.data.nonVistati
                     }
                 // eslint-disable-next-line
                 console.log(ordiniData)
-                this.$router.push({ name: 'result', params: {
-                    vistati : ordiniData.vistati,
-                    nonVistati : ordiniData.nonVistati
-            }})
+                this.$router.push({
+                    name: 'result',
+                    params: {
+                        vistati : ordiniData.vistati,
+                        nonVistati : ordiniData.nonVistati
+                    }
+                })
             }).catch(error => {
                 // eslint-disable-next-line
                 console.log(error)
