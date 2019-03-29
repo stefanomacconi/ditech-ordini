@@ -56,7 +56,7 @@
             <v-layout row slot="extension">
                 <v-icon left>search</v-icon>
                 &nbsp;&nbsp;
-                <v-text-field v-model="filterText" label="Filtro degli ordini"></v-text-field>
+                <v-text-field @input="unToggleAll()" v-model="filterText" label="Filtro degli ordini"></v-text-field>
             </v-layout>
         </v-toolbar>
         <v-list two-line>
@@ -248,6 +248,10 @@ export default {
         },
         getDate(data) {
             return new Date(data - this.tzoffset).toISOString().substring(0, 10)
+        },
+        unToggleAll() {
+            this.indiciSelezionati = []
+            this.ordiniSelezionati = []
         }
     }
 }
