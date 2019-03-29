@@ -68,7 +68,9 @@
                 <v-list-tile-sub-title>{{ ordine.utente }}</v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
-                <v-list-tile-action-text>{{ new Date(ordine.dataDocumento).toISOString().substring(0, 10) }}</v-list-tile-action-text>
+                <v-list-tile-action-text>
+                    {{ getDate(ordine.dataDocumento) }}
+                </v-list-tile-action-text>
                 <v-icon v-if="indiciSelezionati.indexOf(index) < 0"> check_box_outline_blank </v-icon>
                 <v-icon v-else> check_box </v-icon>
               </v-list-tile-action>
@@ -118,7 +120,8 @@ export default {
             ordiniSelezionati: [],
             dialog: false,
             dialogLoading: false,
-            filterText: ""
+            filterText: "",
+            tzoffset: (new Date()).getTimezoneOffset() * 60000 //offset in milliseconds
         }
     },
     computed: {
@@ -138,7 +141,7 @@ export default {
                     ordine.numeroDocumento.toString().match(this.filterText) ||
                     ordine.ragioneSociale.match(this.filterText) ||
                     ordine.utente.match(this.filterText) ||
-                    new Date(ordine.dataDocumento).toISOString().substring(0, 10).match(this.filterText)
+                    this.getDate(ordine.dataDocumento).match(this.filterText)
                 )
             })
         },
@@ -242,6 +245,9 @@ export default {
         },
         goToConferma() {
             this.$router.push('/conferma')
+        },
+        getDate(data) {
+            return new Date(data - this.tzoffset).toISOString().substring(0, 10)
         }
     }
 }

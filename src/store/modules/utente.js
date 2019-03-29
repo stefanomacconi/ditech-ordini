@@ -71,12 +71,15 @@ const actions = {
         }
         // eslint-disable-next-line
         console.log(errorData)
-        router.push({ name: 'error', params: {
-            message : errorData.message,
-            developerMessage : errorData.developerMessage,
-            code : errorData.code,
-            status : errorData.status, 
-        }})
+        router.push({
+            name: 'error', 
+            params: {
+                message : errorData.message,
+                developerMessage : errorData.developerMessage,
+                code : errorData.code,
+                status : errorData.status 
+            }
+        })
     }
 }
 
